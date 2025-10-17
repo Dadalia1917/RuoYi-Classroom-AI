@@ -1,6 +1,4 @@
-# 🎓 RuoYi-AI-Classroom
-
-## 基于RuoYi框架的智能课堂行为分析系统
+# 🎓  基于RuoYi框架的智能课堂行为分析系统
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.java.net/)
