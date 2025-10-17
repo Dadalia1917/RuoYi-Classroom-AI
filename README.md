@@ -453,13 +453,6 @@ server {
 - 重要功能请更新文档
 - 确保新功能通过测试
 
----
-
-## 📄 许可证
-
-本项目采用 **MIT License** 开源协议。
-
----
 
 ## 🙏 致谢
 
@@ -472,15 +465,6 @@ server {
 - [Deepseek](https://www.deepseek.com/) - 大语言模型
 - [通义千问](https://tongyi.aliyun.com/) - 大语言模型
 
----
-
-## 📧 联系方式
-
-- **GitHub**: https://github.com/your-username/ruoyi-ai-classroom
-- **Issues**: [提交问题](https://github.com/your-username/ruoyi-ai-classroom/issues)
-- **Discussions**: [参与讨论](https://github.com/your-username/ruoyi-ai-classroom/discussions)
-
----
 
 <div align="center">
 
