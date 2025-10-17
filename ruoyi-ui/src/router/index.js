@@ -61,6 +61,7 @@ export const constantRoutes = [
     path: '',
     component: Layout,
     redirect: '/index',
+    hidden: true,  // 隐藏此路由，避免与数据库菜单中的"数据总览"重复
     children: [
       {
         path: '/index',
