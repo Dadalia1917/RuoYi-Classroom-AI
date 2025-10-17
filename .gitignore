@@ -45,3 +45,41 @@ nbdist/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
+
+######################################################################
+# Frontend
+
+### Node ###
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+ruoyi-ui/node_modules/
+ruoyi-ui/dist/
+
+######################################################################
+# Python
+
+### Python ###
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+ruoyi-flask/__pycache__/
+ruoyi-flask/**/__pycache__/
+ruoyi-flask/runs/
+
+######################################################################
+# Third Party
+
+### FFmpeg (不需要上传，本地使用即可) ###
+# ffmpeg-8.0-full_build/
+
+######################################################################
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
