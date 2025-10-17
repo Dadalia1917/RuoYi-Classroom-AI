@@ -10,7 +10,7 @@ import numpy as np
 
 import cv2
 import requests
-from flask import Flask, Response, request
+from flask import Flask, Response, request, jsonify
 from flask_socketio import SocketIO, emit
 from ultralytics import RTDETR
 
@@ -158,7 +158,16 @@ class VideoProcessingApp:
     def __init__(self, host='0.0.0.0', port=5000):
         """初始化 Flask 应用并设置路由"""
         self.app = Flask(__name__)
-        self.socketio = SocketIO(self.app, cors_allowed_origins="*")  # 初始化 SocketIO
+        self.socketio = SocketIO(
+            self.app, 
+            cors_allowed_origins="*",
+            async_mode='threading',
+            logger=False,
+            engineio_logger=False,
+            ping_timeout=60,
+            ping_interval=25,
+            transports=['polling', 'websocket']  # 先使用polling，再升级到websocket
+        )  # 初始化 SocketIO
         self.host = host
         self.port = port
         self.setup_routes()
@@ -198,7 +207,7 @@ class VideoProcessingApp:
     def file_names(self):
         """模型列表接口"""
         weight_items = [{'value': name, 'label': name} for name in self.get_file_names("./weights")]
-        return json.dumps({'weight_items': weight_items})
+        return jsonify({'weight_items': weight_items})
 
     def predictImg(self):
         """图片预测接口"""
@@ -292,7 +301,7 @@ class VideoProcessingApp:
         path = self.data["inputImg"].split('/')[-1]
         if os.path.exists('./' + path):
             os.remove('./' + path)
-        return json.dumps(self.data, ensure_ascii=False)
+        return jsonify(self.data)
 
     def predictVideo(self):
         """视频预测接口"""
@@ -307,7 +316,7 @@ class VideoProcessingApp:
         })
         
         if not all([self.data["username"], self.data["weight"], self.data["conf"]]):
-            return json.dumps({"status": 400, "message": "参数不完整", "code": -1})
+            return jsonify({"status": 400, "message": "参数不完整", "code": -1})
             
         self.socketio.emit('message', {'data': '正在加载，请稍等！'})
         model = RTDETR(f'./weights/{self.data["weight"]}')
@@ -315,7 +324,7 @@ class VideoProcessingApp:
         # 下载视频文件
         video_url = request.args.get('inputVideo')
         if not video_url:
-            return json.dumps({"status": 400, "message": "未上传视频", "code": -1})
+            return jsonify({"status": 400, "message": "未上传视频", "code": -1})
             
         # 使用download方法下载视频
         os.makedirs(os.path.dirname(self.paths['download']), exist_ok=True)
@@ -327,13 +336,13 @@ class VideoProcessingApp:
                         if chunk:
                             file.write(chunk)
         except requests.RequestException as e:
-            return json.dumps({"status": 400, "message": f"视频下载失败: {str(e)}", "code": -1})
+            return jsonify({"status": 400, "message": f"视频下载失败: {str(e)}", "code": -1})
             
         self.data["inputVideo"] = video_url
         
         cap = cv2.VideoCapture(self.paths['download'])
         if not cap.isOpened():
-            return json.dumps({"status": 400, "message": "无法打开视频文件", "code": -1})
+            return jsonify({"status": 400, "message": "无法打开视频文件", "code": -1})
             
         frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -549,7 +558,7 @@ class VideoProcessingApp:
     def stopCamera(self):
         """停止摄像头预测"""
         self.recording = False
-        return json.dumps({"status": 200, "message": "预测成功", "code": 0})
+        return jsonify({"status": 200, "message": "预测成功", "code": 0})
 
     def process_list(self, input_list):
         # 去除重复元素并保持原顺序

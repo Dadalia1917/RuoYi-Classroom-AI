@@ -395,7 +395,7 @@ const htmlToPDF = (elementId, filename) => {
 // 初始化Socket连接
 const initSocket = () => {
   socket = io('http://127.0.0.1:5000', {
-    transports: ['websocket', 'polling'],
+    transports: ['polling', 'websocket'],  // 先使用polling，再升级到websocket
     reconnection: true,
     reconnectionAttempts: 5,
     reconnectionDelay: 1000
