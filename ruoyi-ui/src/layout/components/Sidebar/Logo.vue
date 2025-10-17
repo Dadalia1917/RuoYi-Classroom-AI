@@ -14,6 +14,8 @@
 </template>
 
 <script setup>
+// TODO: 请将 @/assets/logo/logo.png 替换为学士帽或博士帽图标
+// 建议图标尺寸：64x64 或 128x128 像素
 import logo from '@/assets/logo/logo.png'
 import useSettingsStore from '@/store/modules/settings'
 import variables from '@/assets/styles/variables.module.scss'
@@ -25,7 +27,7 @@ defineProps({
   }
 })
 
-const title = import.meta.env.VITE_APP_TITLE
+const title = import.meta.env.VITE_APP_TITLE || '课堂行为分析系统'
 const settingsStore = useSettingsStore()
 const sideTheme = computed(() => settingsStore.sideTheme)
 

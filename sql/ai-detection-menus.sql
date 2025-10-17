@@ -48,11 +48,10 @@ INSERT INTO sys_menu VALUES(2124, '摄像记录删除', '2013', '4', '', '', '',
 INSERT INTO sys_menu VALUES(2125, '摄像记录导出', '2013', '5', '', '', '', '', 1, 0, 'F', '0', '0', 'ai:cameraRecords:export', '#', 'admin', sysdate(), '', null, '');
 
 -- 更新系统管理等菜单的order_num
--- 首页(0) -> 数据总览(1) -> AI检测(2) -> 检测记录(3) -> 系统管理(4) -> 系统监控(5) -> 系统工具(6) -> 若依官网(7)
+-- 数据总览(1) -> AI检测(2) -> 检测记录(3) -> 系统管理(4) -> 系统监控(5) -> 系统工具(6)
 UPDATE sys_menu SET order_num = 4 WHERE menu_id = 1 AND menu_name = '系统管理';
 UPDATE sys_menu SET order_num = 5 WHERE menu_id = 2 AND menu_name = '系统监控';  
 UPDATE sys_menu SET order_num = 6 WHERE menu_id = 3 AND menu_name = '系统工具';
-UPDATE sys_menu SET order_num = 7 WHERE menu_id = 4 AND menu_name = '若依官网';
 
 -- 为超级管理员分配数据总览、AI检测和检测记录菜单权限
 INSERT INTO sys_role_menu VALUES ('1', '1500');

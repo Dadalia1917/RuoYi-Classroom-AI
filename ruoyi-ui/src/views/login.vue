@@ -59,7 +59,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2018-2025 ruoyi.vip All Rights Reserved.</span>
+      <span>Copyright © 2025 Classroom Behavior Analysis System. All Rights Reserved.</span>
     </div>
   </div>
 </template>
@@ -70,7 +70,7 @@ import Cookies from "js-cookie"
 import { encrypt, decrypt } from "@/utils/jsencrypt"
 import useUserStore from '@/store/modules/user'
 
-const title = import.meta.env.VITE_APP_TITLE
+const title = import.meta.env.VITE_APP_TITLE || '课堂行为分析系统'
 const userStore = useUserStore()
 const route = useRoute()
 const router = useRouter()

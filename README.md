@@ -810,7 +810,19 @@ spring:
       database: 0
 ```
 
-### 3️⃣ 启动后端服务
+### 3️⃣ IntelliJ IDEA 配置（重要）
+
+如果使用 **IntelliJ IDEA** 开发，请按以下步骤配置（解决 JDK 25 编译问题）：
+
+1. 打开 `File` → `Settings`（或按 `Ctrl + Alt + S`）
+2. 导航到：`Build, Execution, Deployment` → `Build Tools` → `Maven` → `Runner`
+3. 勾选 ✅ **`Delegate IDE build/run actions to Maven`**（将 IDE 构建/运行操作委托给 Maven）
+4. 点击 `Apply` 和 `OK`
+5. 重新构建项目：`Build` → `Rebuild Project`
+
+> 💡 **说明**：此配置让 IDEA 使用 Maven 进行编译，而不是自带的编译器。Maven 会自动应用 `pom.xml` 中配置的 JDK 25 兼容性参数，避免编译错误。
+
+### 4️⃣ 启动后端服务
 
 ```bash
 # 编译整个项目
@@ -820,12 +832,12 @@ mvn clean install
 cd ruoyi-admin
 mvn spring-boot:run
 
-# 或直接运行 RuoYiApplication.java
+# 或在 IDEA 中直接运行 RuoYiApplication.java
 ```
 
 访问：http://localhost:9999
 
-### 4️⃣ Python环境配置
+### 5️⃣ Python环境配置
 
 ```bash
 # 创建虚拟环境（推荐）
@@ -839,7 +851,7 @@ pip install ultralytics opencv-python numpy
 pip install requests openai python-dotenv
 ```
 
-### 5️⃣ 启动Flask AI服务
+### 6️⃣ 启动Flask AI服务
 
 ```bash
 cd ruoyi-flask
@@ -853,7 +865,7 @@ python main(YOLO).py
 
 访问：http://localhost:5000
 
-### 6️⃣ 前端配置与启动
+### 7️⃣ 前端配置与启动
 
 ```bash
 cd ruoyi-ui
@@ -987,6 +999,17 @@ RuoYi-Vue3-springboot3/ffmpeg-8.0-full_build/bin/ffmpeg.exe
 ---
 
 ## 🐛 常见问题
+
+### Q: IntelliJ IDEA 编译失败，提示 `java.lang.ExceptionInInitializerError`？
+**A:** 这是因为 IDEA 使用自带编译器无法正确处理 JDK 25。请按以下步骤解决：
+1. 打开 `Settings` → `Build Tools` → `Maven` → `Runner`
+2. 勾选 ✅ `Delegate IDE build/run actions to Maven`
+3. 重新构建项目
+
+或者，在 `Settings` → `Compiler` → `Java Compiler` → `Additional command line parameters` 中添加：
+```
+--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED
+```
 
 ### Q: 摄像头无法打开？
 **A:** 本项目使用FFmpeg直接捕获摄像头，解决了OpenCV在Windows 11上的兼容性问题。系统会自动检测可用摄像头。
