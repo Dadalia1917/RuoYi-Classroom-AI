@@ -1,12 +1,10 @@
-# 🎓 RuoYi-AI-Classroom
-
-## 基于RuoYi框架的智能课堂行为分析系统
+# 🎓  基于RuoYi框架的智能课堂行为分析系统
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.java.net/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.6-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.5.13-4FC08D.svg)](https://vuejs.org/)
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![RuoYi](https://img.shields.io/badge/RuoYi-Vue3-red.svg)](http://ruoyi.vip/)
 
 ---

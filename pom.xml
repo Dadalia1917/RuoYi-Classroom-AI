@@ -10,7 +10,7 @@
 
     <name>ruoyi</name>
     <url>http://www.ruoyi.vip</url>
-    <description>若依管理系统</description>
+    <description>基于RuoYi框架的智能课堂行为分析系统</description>
     
     <properties>
         <ruoyi.version>3.9.0</ruoyi.version>
