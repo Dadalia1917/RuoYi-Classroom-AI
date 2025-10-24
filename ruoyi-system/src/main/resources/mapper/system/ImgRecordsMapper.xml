@@ -7,11 +7,102 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="com.ruoyi.system.domain.ImgRecords" id="ImgRecordsResult">
         <id     property="id"           column="id"            />
         <result property="username"     column="username"      />
-        <result property="filename"     column="filename"      />
-        <result property="aiAdv"        column="ai_adv"        />
-        <result property="aiModel"      column="ai_model"      />
-        <result property="time"         column="time"          />
+        <result property="inputImg"     column="input_img"     />
+        <result property="outImg"       column="out_img"       />
+        <result property="confidence"   column="confidence"    />
+        <result property="allTime"      column="all_time"      />
+        <result property="conf"         column="conf"          />
+        <result property="weight"       column="weight"        />
+        <result property="startTime"    column="start_time"    />
+        <result property="label"        column="label"         />
+        <result property="ai"           column="ai"            />
+        <result property="suggestion"   column="suggestion"    />
     </resultMap>
+
+    <sql id="selectImgRecordsVo">
+        select id, username, input_img, out_img, confidence, all_time, conf, weight, start_time, label, ai, suggestion
+        from imgrecords
+    </sql>
+
+    <select id="selectImgRecordsList" parameterType="com.ruoyi.system.domain.ImgRecords" resultMap="ImgRecordsResult">
+        <include refid="selectImgRecordsVo"/>
+        <where>
+            <if test="username != null and username != ''">
+                AND username like concat('%', #{username}, '%')
+            </if>
+            <if test="label != null and label != ''">
+                AND label like concat('%', #{label}, '%')
+            </if>
+            <if test="startTime != null and startTime != ''">
+                AND start_time like concat('%', #{startTime}, '%')
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="selectImgRecordsById" parameterType="Long" resultMap="ImgRecordsResult">
+        <include refid="selectImgRecordsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertImgRecords" parameterType="com.ruoyi.system.domain.ImgRecords">
+        insert into imgrecords
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != ''">username,</if>
+            <if test="inputImg != null and inputImg != ''">input_img,</if>
+            <if test="outImg != null and outImg != ''">out_img,</if>
+            <if test="confidence != null">confidence,</if>
+            <if test="allTime != null and allTime != ''">all_time,</if>
+            <if test="conf != null">conf,</if>
+            <if test="weight != null and weight != ''">weight,</if>
+            <if test="startTime != null and startTime != ''">start_time,</if>
+            <if test="label != null">label,</if>
+            <if test="ai != null and ai != ''">ai,</if>
+            <if test="suggestion != null">suggestion,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="inputImg != null and inputImg != ''">#{inputImg},</if>
+            <if test="outImg != null and outImg != ''">#{outImg},</if>
+            <if test="confidence != null">#{confidence},</if>
+            <if test="allTime != null and allTime != ''">#{allTime},</if>
+            <if test="conf != null">#{conf},</if>
+            <if test="weight != null and weight != ''">#{weight},</if>
+            <if test="startTime != null and startTime != ''">#{startTime},</if>
+            <if test="label != null">#{label},</if>
+            <if test="ai != null and ai != ''">#{ai},</if>
+            <if test="suggestion != null">#{suggestion},</if>
+        </trim>
+    </insert>
+
+    <update id="updateImgRecords" parameterType="com.ruoyi.system.domain.ImgRecords">
+        update imgrecords
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="inputImg != null and inputImg != ''">input_img = #{inputImg},</if>
+            <if test="outImg != null and outImg != ''">out_img = #{outImg},</if>
+            <if test="confidence != null">confidence = #{confidence},</if>
+            <if test="allTime != null and allTime != ''">all_time = #{allTime},</if>
+            <if test="conf != null">conf = #{conf},</if>
+            <if test="weight != null and weight != ''">weight = #{weight},</if>
+            <if test="startTime != null and startTime != ''">start_time = #{startTime},</if>
+            <if test="label != null">label = #{label},</if>
+            <if test="ai != null and ai != ''">ai = #{ai},</if>
+            <if test="suggestion != null">suggestion = #{suggestion},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteImgRecordsById" parameterType="Long">
+        delete from imgrecords where id = #{id}
+    </delete>
+
+    <delete id="deleteImgRecordsByIds" parameterType="String">
+        delete from imgrecords where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>
 

@@ -97,7 +97,7 @@ public class ImgRecordsController {
     /**
      * 保存记录
      */
-    @PostMapping
+    @PostMapping("/save")
     public AjaxResult save(@RequestBody ImgRecords imgrecords) {
         imgRecordsMapper.insert(imgrecords);
         return AjaxResult.success();

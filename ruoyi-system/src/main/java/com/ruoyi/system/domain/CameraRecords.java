@@ -1,6 +1,7 @@
 package com.ruoyi.system.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -20,16 +21,34 @@ public class CameraRecords {
     private String weight;
     
     /** 输出视频 */
+    @TableField("out_video")
     private String outVideo;
     
-    /** 置信度 */
+    /** 置信度阈值 */
     private String conf;
     
     /** 用户名 */
     private String username;
     
     /** 开始时间 */
+    @TableField("start_time")
     private String startTime;
+    
+    /** AI模型类型 */
+    private String ai;
+    
+    /** AI建议 */
+    private String suggestion;
+    
+    /** 检测标签 */
+    private String label;
+    
+    /** 置信度详情 */
+    private String confidence;
+    
+    /** 总耗时 */
+    @TableField("all_time")
+    private String allTime;
 
     // Getter and Setter methods
     public Integer getId() {
@@ -78,6 +97,46 @@ public class CameraRecords {
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
+    }
+
+    public String getAi() {
+        return ai;
+    }
+
+    public void setAi(String ai) {
+        this.ai = ai;
+    }
+
+    public String getSuggestion() {
+        return suggestion;
+    }
+
+    public void setSuggestion(String suggestion) {
+        this.suggestion = suggestion;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getConfidence() {
+        return confidence;
+    }
+
+    public void setConfidence(String confidence) {
+        this.confidence = confidence;
+    }
+
+    public String getAllTime() {
+        return allTime;
+    }
+
+    public void setAllTime(String allTime) {
+        this.allTime = allTime;
     }
 }
 

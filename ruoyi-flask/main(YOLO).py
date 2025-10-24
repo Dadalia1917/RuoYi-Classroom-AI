@@ -3,12 +3,14 @@ import os
 import subprocess
 import threading
 import queue
+import time
 import numpy as np
 
 import cv2
 import requests
 from flask import Flask, Response, request, jsonify
 from flask_socketio import SocketIO, emit
+from flask_cors import CORS
 from ultralytics import YOLO
 
 from utils import predictImgY, chatApi
@@ -157,6 +159,10 @@ class VideoProcessingApp:
     def __init__(self, host='0.0.0.0', port=5000):
         """初始化 Flask 应用并设置路由"""
         self.app = Flask(__name__)
+        
+        # 启用CORS，允许所有域名访问（解决前端跨域问题）
+        CORS(self.app, resources={r"/*": {"origins": "*"}})
+        
         self.socketio = SocketIO(
             self.app, 
             cors_allowed_origins="*",
@@ -313,6 +319,8 @@ class VideoProcessingApp:
 
     def predictVideo(self):
         """视频预测接口"""
+        startTime = time.time()  # 记录开始时间
+        
         self.data.clear()
         
         # 打印原始请求参数
@@ -385,6 +393,7 @@ class VideoProcessingApp:
         )
         
         all_labels = []  # 存储所有检测到的标签
+        all_confidences = []  # 存储所有检测到的置信度
 
         def generate():
             try:
@@ -405,6 +414,7 @@ class VideoProcessingApp:
                             label_id = int(box.cls[0])
                             if label_id in current_labels:
                                 all_labels.append(current_labels[label_id])
+                                all_confidences.append(float(box.conf[0]))
                     
                     _, jpeg = cv2.imencode('.jpg', processed_frame)
                     yield b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + jpeg.tobytes() + b'\r\n'
@@ -501,12 +511,30 @@ class VideoProcessingApp:
                 except Exception as e:
                     print(f"视频格式转换失败: {e}")
                 
+                # 计算检测时长
+                endTime = time.time()
+                allTime = f"{(endTime - startTime):.1f}秒"
+                
                 # 上传视频文件
                 try:
                     uploadedUrl = self.upload(self.paths['output'])
                     if uploadedUrl:
                         self.data["outVideo"] = uploadedUrl
-                        self.socketio.emit('video_complete', {'url': uploadedUrl})
+                        self.data["label"] = json.dumps(all_labels)
+                        self.data["confidence"] = json.dumps(all_confidences)
+                        self.data["allTime"] = allTime
+                        
+                        # 推送完整的检测结果
+                        self.socketio.emit('video_complete', {
+                            'url': uploadedUrl,
+                            'label': all_labels,
+                            'confidence': all_confidences,
+                            'allTime': allTime,
+                            'suggestion': self.data.get("suggestion", "")
+                        })
+                        print(f"✅ 视频检测完成！标签数: {len(all_labels)}, 置信度数: {len(all_confidences)}, 耗时: {allTime}")
+                    else:
+                        self.socketio.emit('message', {'data': '视频处理完成，但上传失败！'})
                 except Exception as e:
                     print(f"视频上传异常: {e}")
                 
@@ -537,7 +565,8 @@ class VideoProcessingApp:
         self.data.clear()
         self.data.update({
             "username": request.args.get('username'), "weight": request.args.get('weight'),
-            "conf": request.args.get('conf'), "startTime": request.args.get('startTime')
+            "conf": request.args.get('conf'), "startTime": request.args.get('startTime'),
+            "ai": request.args.get('ai', '不使用AI')
         })
         self.socketio.emit('message', {'data': '正在加载，请稍等！'})
         model = YOLO(f'./weights/{self.data["weight"]}')
@@ -564,6 +593,7 @@ class VideoProcessingApp:
                         break
                     results = model.predict(source=frame, imgsz=640, conf=float(self.data['conf']), show=False)
                     processed_frame = results[0].plot()
+                    
                     if self.recording and video_writer:
                         video_writer.write(processed_frame)
                     _, jpeg = cv2.imencode('.jpg', processed_frame)
@@ -582,17 +612,31 @@ class VideoProcessingApp:
                     
                     if file_size > 0:
                         self.socketio.emit('message', {'data': '正在保存视频...'})
-                        for progress in self.convert_avi_to_mp4(self.paths['camera_output']):
-                            self.socketio.emit('progress', {'data': progress})
-                        uploadedUrl = self.upload(self.paths['output'])
-                        if uploadedUrl:
-                            self.socketio.emit('video_complete', {'url': uploadedUrl})
+                        try:
+                            # 尝试转换为MP4
+                            for progress in self.convert_avi_to_mp4(self.paths['camera_output']):
+                                self.socketio.emit('progress', {'data': progress})
+                            
+                            # 如果转换成功，上传MP4文件
+                            uploadedUrl = self.upload(self.paths['output'])
+                            if uploadedUrl:
+                                self.socketio.emit('video_complete', {'url': uploadedUrl})
+                        except Exception as e:
+                            print(f"❌ 视频转换失败: {e}")
+                            # 如果转换失败，直接上传原始AVI文件
+                            print("⚠️ 尝试直接上传原始AVI文件...")
+                            uploadedUrl = self.upload(self.paths['camera_output'])
+                            if uploadedUrl:
+                                self.socketio.emit('video_complete', {'url': uploadedUrl})
                     else:
                         print("视频文件为空")
                 else:
                     print("视频文件不存在")
                 
+                # 保存检测数据（仅保存基本信息）
                 self.data["outVideo"] = uploadedUrl
+                
+                print(f"✅ 摄像头检测完成！视频已保存")
                 self.save_data(json.dumps(self.data), 'http://localhost:9999/cameraRecords')
                 self.cleanup_files([self.paths['output'], self.paths['camera_output']])
 

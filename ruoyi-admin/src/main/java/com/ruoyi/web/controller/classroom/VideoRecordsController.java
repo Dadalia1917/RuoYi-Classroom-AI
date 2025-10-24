@@ -97,7 +97,7 @@ public class VideoRecordsController {
     /**
      * 保存记录
      */
-    @PostMapping
+    @PostMapping("/save")
     public AjaxResult save(@RequestBody VideoRecords videoRecords) {
         videoRecordsMapper.insert(videoRecords);
         return AjaxResult.success();

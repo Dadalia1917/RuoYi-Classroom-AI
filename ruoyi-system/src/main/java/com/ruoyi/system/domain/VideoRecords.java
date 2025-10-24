@@ -1,6 +1,7 @@
 package com.ruoyi.system.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -20,9 +21,11 @@ public class VideoRecords {
     private String weight;
     
     /** 输入视频 */
+    @TableField("input_video")
     private String inputVideo;
     
     /** 输出视频 */
+    @TableField("out_video")
     private String outVideo;
     
     /** 置信度 */
@@ -32,6 +35,7 @@ public class VideoRecords {
     private String username;
     
     /** 开始时间 */
+    @TableField("start_time")
     private String startTime;
     
     /** AI模型类型 */
@@ -39,6 +43,16 @@ public class VideoRecords {
     
     /** AI建议 */
     private String suggestion;
+    
+    /** 检测标签 */
+    private String label;
+    
+    /** 置信度详情 */
+    private String confidence;
+    
+    /** 总耗时 */
+    @TableField("all_time")
+    private String allTime;
 
     // Getter and Setter methods
     public Integer getId() {
@@ -111,6 +125,30 @@ public class VideoRecords {
 
     public void setSuggestion(String suggestion) {
         this.suggestion = suggestion;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getConfidence() {
+        return confidence;
+    }
+
+    public void setConfidence(String confidence) {
+        this.confidence = confidence;
+    }
+
+    public String getAllTime() {
+        return allTime;
+    }
+
+    public void setAllTime(String allTime) {
+        this.allTime = allTime;
     }
 }
 

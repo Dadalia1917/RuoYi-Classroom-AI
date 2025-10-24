@@ -1,6 +1,7 @@
 package com.ruoyi.system.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -20,15 +21,18 @@ public class ImgRecords {
     private String weight;
     
     /** 输入图片 */
+    @TableField("input_img")
     private String inputImg;
     
     /** 输出图片 */
+    @TableField("out_img")
     private String outImg;
     
     /** 置信度详情 */
     private String confidence;
     
     /** 总耗时 */
+    @TableField("all_time")
     private String allTime;
     
     /** 置信度阈值 */
@@ -41,6 +45,7 @@ public class ImgRecords {
     private String username;
     
     /** 开始时间 */
+    @TableField("start_time")
     private String startTime;
     
     /** AI模型类型 */
@@ -112,14 +117,6 @@ public class ImgRecords {
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public String getLable() {
-        return label;
-    }
-
-    public void setLable(String lable) {
-        this.label = lable;
     }
 
     public String getUsername() {

@@ -1,0 +1,167 @@
+{
+  "pages": [{
+    "path": "pages/login",
+    "style": {
+      "navigationBarTitleText": "登录"
+    }
+  }, {
+    "path": "pages/register",
+    "style": {
+      "navigationBarTitleText": "注册"
+    }
+  }, {
+    "path": "pages/index",
+    "style": {
+      "navigationBarTitleText": "课堂行为分析系统",
+      "navigationStyle": "custom"
+    }
+  }, {
+    "path": "pages/ai/index",
+    "style": {
+      "navigationBarTitleText": "AI行为分析"
+    }
+  }, {
+    "path": "pages/ai/data-overview/index",
+    "style": {
+      "navigationBarTitleText": "数据总览"
+    }
+  }, {
+    "path": "pages/ai/img-predict/index",
+    "style": {
+      "navigationBarTitleText": "图像检测"
+    }
+  }, {
+    "path": "pages/ai/video-predict/index",
+    "style": {
+      "navigationBarTitleText": "视频检测"
+    }
+  }, {
+    "path": "pages/ai/camera-predict/index",
+    "style": {
+      "navigationBarTitleText": "摄像检测"
+    }
+  }, {
+    "path": "pages/ai/img-records/index",
+    "style": {
+      "navigationBarTitleText": "图像记录"
+    }
+  }, {
+    "path": "pages/ai/video-records/index",
+    "style": {
+      "navigationBarTitleText": "视频记录"
+    }
+  }, {
+    "path": "pages/ai/camera-records/index",
+    "style": {
+      "navigationBarTitleText": "摄像记录"
+    }
+  }, {
+    "path": "pages/work/index",
+    "style": {
+      "navigationBarTitleText": "工作台"
+    }
+  }, {
+    "path": "pages/mine/index",
+    "style": {
+      "navigationBarTitleText": "我的"
+    }
+  }, {
+    "path": "pages/mine/avatar/index",
+    "style": {
+      "navigationBarTitleText": "修改头像"
+    }
+  }, {
+    "path": "pages/mine/info/index",
+    "style": {
+      "navigationBarTitleText": "个人信息"
+    }
+  }, {
+    "path": "pages/mine/info/edit",
+    "style": {
+      "navigationBarTitleText": "编辑资料"
+    }
+  }, {
+    "path": "pages/mine/pwd/index",
+    "style": {
+      "navigationBarTitleText": "修改密码"
+    }
+  }, {
+    "path": "pages/mine/setting/index",
+    "style": {
+      "navigationBarTitleText": "应用设置"
+    }
+  }, {
+    "path": "pages/mine/help/index",
+    "style": {
+      "navigationBarTitleText": "常见问题"
+    }
+  }, {
+    "path": "pages/mine/about/index",
+    "style": {
+      "navigationBarTitleText": "关于我们"
+    }
+  }, {
+    "path": "pages/common/webview/index",
+    "style": {
+      "navigationBarTitleText": "浏览网页"
+    }
+  }, {
+    "path": "pages/common/textview/index",
+    "style": {
+      "navigationBarTitleText": "浏览文本"
+    }
+  }],
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#007aff",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [{
+        "pagePath": "pages/index",
+        "text": "首页",
+        "iconfont": {
+          "text": "🏠",
+          "selectedText": "🏠",
+          "fontSize": "18px",
+          "color": "#8a8a8a",
+          "selectedColor": "#007aff"
+        }
+      }, {
+        "pagePath": "pages/ai/index",
+        "text": "AI分析",
+        "iconfont": {
+          "text": "🤖",
+          "selectedText": "🤖",
+          "fontSize": "18px",
+          "color": "#8a8a8a",
+          "selectedColor": "#007aff"
+        }
+      }, {
+        "pagePath": "pages/work/index",
+        "text": "工作台",
+        "iconfont": {
+          "text": "💼",
+          "selectedText": "💼",
+          "fontSize": "18px",
+          "color": "#8a8a8a",
+          "selectedColor": "#007aff"
+        }
+      }, {
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconfont": {
+          "text": "👤",
+          "selectedText": "👤",
+          "fontSize": "18px",
+          "color": "#8a8a8a",
+          "selectedColor": "#007aff"
+        }
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "课堂行为分析系统",
+    "navigationBarBackgroundColor": "#FFFFFF"
+  }
+}
