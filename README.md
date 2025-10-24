@@ -1,11 +1,12 @@
 # 🎓 智能课堂行为分析系统（全栈版）
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.java.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.6-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/JDK-25-orange.svg)](https://openjdk.java.net/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.7-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.5.13-4FC08D.svg)](https://vuejs.org/)
 [![uni-app](https://img.shields.io/badge/uni--app-Vue3-2B9939.svg)](https://uniapp.dcloud.net.cn/)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
+[![CUDA](https://img.shields.io/badge/CUDA-12.8-76B900.svg)](https://developer.nvidia.com/cuda-toolkit)
 [![AI Powered](https://img.shields.io/badge/AI-YOLO%20%2B%20LLM-ff69b4.svg)]()
 
 ---
@@ -48,14 +49,14 @@
 
 > **本项目是全栈智能课堂行为分析系统**，基于 **RuoYi-Vue3** 企业级框架深度定制，同时移植 **RuoYi-App-Vue3** 移动端框架，实现PC端 + 移动端全平台覆盖。
 
-系统整合 **Spring Boot 3.5.6**、**Vue 3.5.13**、**uni-app** 等现代技术栈，结合 **计算机视觉（YOLO/RT-DETR）** 与 **大语言模型（DeepSeek/通义千问）**，打造企业级AI教育应用解决方案。
+系统整合 **Spring Boot 3.5.7**、**Vue 3.5.13**、**uni-app** 等现代技术栈，结合 **计算机视觉（YOLO/RT-DETR）** 与 **大语言模型（DeepSeek/通义千问）**，打造企业级AI教育应用解决方案。
 
 ### 🌟 核心特性
 
 - 🏢 **企业级框架**：基于RuoYi框架，完善的权限管理、菜单配置、系统监控
 - 📱 **全平台覆盖**：PC端（Web） + 移动端（H5/小程序/APP），一套后端多端复用
 - 🤖 **AI智能检测**：YOLO/RT-DETR目标检测 + 大模型智能分析
-- 🎯 **前后端分离**：Spring Boot 3.5.6 + Vue 3 + Element Plus + uni-app
+- 🎯 **前后端分离**：Spring Boot 3.5.7 + Vue 3 + Element Plus + uni-app
 - 📊 **数据可视化**：ECharts实时展示学生行为统计（PC端和移动端）
 - 🔐 **安全认证**：Spring Security + JWT + Redis统一认证
 - 📹 **多模态检测**：图片、视频、实时摄像头三种检测方式（PC端和移动端均支持）
@@ -71,7 +72,7 @@
 | 📱 多端适配 | 基于uni-app，支持H5/微信小程序/APP多端发布 |
 | 🔧 灵活部署 | 支持云端API、本地LM-Studio、局域网三种AI部署方式 |
 | 📊 可视化报告 | ECharts数据可视化，直观展示检测统计 |
-| 🚀 现代技术栈 | Spring Boot 3.5.6 + Vue 3.5.13 + uni-app，性能卓越 |
+| 🚀 现代技术栈 | Spring Boot 3.5.7 + Vue 3.5.13 + uni-app，性能卓越 |
 | 🎨 美观界面 | Element Plus（PC端） + uni-ui（移动端）现代化UI |
 | 🔐 企业级安全 | Spring Security + JWT双重认证，PC端与移动端统一鉴权 |
 | 🔄 代码复用 | 一套Spring Boot后端，同时服务PC端和移动端 |
@@ -84,7 +85,7 @@
 
 | 技术 | 版本 | 说明 |
 |------|------|------|
-| Spring Boot | 3.5.6 | 核心框架 |
+| Spring Boot | 3.5.7 | 核心框架 |
 | Spring Security | 6.5.5 | 安全框架 |
 | MyBatis-Plus | 3.5.9 | ORM框架 |
 | MySQL | 8.0+ | 关系型数据库 |
@@ -146,7 +147,7 @@ graph TB
         AndroidApp["📱 Android APP<br/>uni-app"]
     end
     
-    subgraph Backend["⚙️ 统一后端 (Spring Boot 3.5.6)"]
+    subgraph Backend["⚙️ 统一后端 (Spring Boot 3.5.7)"]
         SpringBoot["Spring Boot<br/>端口:9999"]
     end
     
@@ -220,7 +221,7 @@ graph TD
     end
 
     %% 业务逻辑层
-    subgraph Backend["⚙️ 业务逻辑层 (Spring Boot 3.5.6)"]
+    subgraph Backend["⚙️ 业务逻辑层 (Spring Boot 3.5.7)"]
         direction TB
         
         subgraph Security["安全框架"]
@@ -492,7 +493,7 @@ graph TD
 
 #### 通用后端组件
 
-3. **⚙️ 业务逻辑层 (Spring Boot 3.5.6)**
+3. **⚙️ 业务逻辑层 (Spring Boot 3.5.7)**
    - **安全框架**：Spring Security + JWT + Redis实现完整的认证授权体系
    - **分层架构**：Controller → Service → Mapper 清晰的三层架构
    - **MyBatis-Plus**：简化数据库操作，提供强大的CRUD能力
@@ -1294,7 +1295,7 @@ graph TB
         end
         
         subgraph Backend["⚙️ 统一后端服务"]
-            SpringBoot[Spring Boot 3.5.6<br/>☕ JDK 21<br/>🔗 端口: 9999<br/>PC端和移动端共用]
+            SpringBoot[Spring Boot 3.5.7<br/>☕ JDK 25<br/>🔗 端口: 9999<br/>PC端和移动端共用]
         end
         
         subgraph AIService["🤖 AI推理服务"]
@@ -1332,7 +1333,7 @@ graph TB
     %% 外部工具层
     subgraph Tools["🛠️ 外部工具层"]
         FFmpeg[🎬 FFmpeg 8.0<br/>📹 视频格式转换<br/>🎥 摄像头捕获]
-        CUDA[⚡ CUDA Runtime<br/>🚀 GPU加速计算<br/>🎯 模型推理加速]
+        CUDA[⚡ CUDA 12.8<br/>🎮 RTX 5060<br/>🚀 GPU加速推理]
     end
     
     %% 监控与日志
@@ -1414,12 +1415,13 @@ graph TB
 
 | 软件 | 版本 | 必需 |
 |------|------|------|
-| JDK | 25+ | ✅ |
-| Node.js | 24+ | ✅ |
-| Python | 3.8+ | ✅ |
+| JDK | 25 | ✅ |
+| Node.js | 18+ | ✅ |
+| Python | 3.11 (Conda) | ✅ |
 | MySQL | 8.0+ | ✅ |
 | Redis | 6.0+ | ✅ |
 | Maven | 3.6+ | ✅ |
+| CUDA | 12.8 | ✅ (GPU加速) |
 
 ### 1️⃣ 数据库初始化
 
@@ -1493,9 +1495,12 @@ mvn spring-boot:run
 ### 5️⃣ Python环境配置
 
 ```bash
-# 创建虚拟环境（推荐）
+# 创建虚拟环境（推荐使用Conda）
 conda create -n yolo python=3.11
 conda activate yolo
+
+# 安装PyTorch (CUDA 12.8支持)
+pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
 
 # 安装依赖
 cd ruoyi-flask
@@ -1503,6 +1508,8 @@ pip install flask flask-socketio flask-cors
 pip install ultralytics opencv-python numpy
 pip install requests openai python-dotenv
 ```
+
+> 💡 **GPU加速说明**：本项目在 **RTX 5060 + CUDA 12.8** 环境测试通过，推理速度显著提升。
 
 ### 6️⃣ 启动Flask AI服务
 
@@ -2010,7 +2017,7 @@ server {
 
 #### 🎉 重大更新
 - ✅ 完整集成RuoYi-Vue3框架
-- ✅ 升级Spring Boot至3.5.6
+- ✅ 升级Spring Boot至3.5.7
 - ✅ 升级Vue至3最新版
 - ✅ 新增数据总览可视化页面
 - ✅ 优化检测记录管理
