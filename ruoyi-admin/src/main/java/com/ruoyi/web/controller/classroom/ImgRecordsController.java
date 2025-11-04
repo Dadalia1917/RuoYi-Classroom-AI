@@ -58,7 +58,7 @@ public class ImgRecordsController {
             wrapper.like(ImgRecords::getStartTime, search1);
         }
         if (StringUtils.isNotBlank(search2)) {
-            wrapper.like(ImgRecords::getLable, search2);
+            wrapper.like(ImgRecords::getLabel, search2);
         }
         if (StringUtils.isNotBlank(search3)) {
             wrapper.like(ImgRecords::getConf, search3);

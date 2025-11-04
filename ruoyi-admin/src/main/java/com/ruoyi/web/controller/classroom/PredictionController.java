@@ -138,7 +138,7 @@ public class PredictionController {
                 imgRecords.setUsername(request.getUsername());
                 imgRecords.setStartTime(request.getStartTime());
                 imgRecords.setAi(request.getAi());
-                imgRecords.setLable(String.valueOf(responses.get("label")));
+                imgRecords.setLabel(String.valueOf(responses.get("label")));
                 imgRecords.setConfidence(String.valueOf(responses.get("confidence")));
                 imgRecords.setAllTime(String.valueOf(responses.get("allTime")));
                 imgRecords.setOutImg(String.valueOf(responses.get("outImg")));
